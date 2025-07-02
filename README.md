@@ -30,7 +30,7 @@ involved in, I had been using scripts to calculate FTs of protein sequences
 to determine whether a coiled-coil repeat nature occurred, and any
 peculiarities in the repeats. However, these scripts were too slow to analyse a
 primary protein sequence database such as UniProt, and also would have
-involved a significant post-processing stage to filter for rpeats within the
+involved a significant post-processing stage to filter for repeats within the
 particular periodicity range of interest.
 
 The REPPER software had been available for a couple of years (Gruber *et al.*,
@@ -42,7 +42,7 @@ locally would have required some significant post-processing of results to
 filter for proteins of interest.
 
 Therefore, UNWAVER was written as a relatively efficient steamroller to seek
-hyrophobic (or any other property) sequence repeats in proteins, within a
+hydrophobic (or any other property) sequence repeats in proteins, within a
 user-defined range of periodicity. The name is a reference to FTs representing
 the deconvoluting of a signal into a sum of 'waves' representing different
 repeat periods of different amplitudes.
@@ -56,7 +56,9 @@ This is a long protein ( > 1,300 amino acids), and the sequence was mostly
 predicted to be an alpha-helical coiled coil, indicating a possible
 structural role. Gabriella and her team had found that deletion of the *scy*
 gene resulted in quite dramatic morphological phenotypes (later published
-in Holmes *et al.*, 2013).
+in Holmes *et al.*, 2013). Also around this time, they had obtained circular
+dichroism data which confirmed that the protein largely adopts an alpha-helical
+conformation.
 
 I analysed the Scy amino acid sequence, and it appeared to exhibit an unusual
 period of hydrophobic repeat. This period is consistent with a right-handed coiled coil, but
@@ -65,23 +67,25 @@ core-position amino acids of a particular character. The especially notable
 property of the repeat is that it is relatively invariant over a very long
 domain of the protein, over 1,000 amino acids, indicating a genuine
 structural and presumably functional uniqueness compared to 'normal'
-right-handed and other coiled coils. The mean hydophobic period indicated 14
+right-handed and other coiled coils. The mean hydrophobic period indicated 14
 turns over a repeat of 51 amino acid residues of alpha-helices in a
 right-handed coiled-coil conformation.
 
 It was therefore natural to suppose that this repeat sequence/structure may
 be key to its function in *Streptomyces* and to ask if other proteins
-existed with this rather precise, sustained repeat existed in other organisms,
+with this rather precise, sustained repeat existed in other organisms,
 and with what potential functions. It transpired that the protein (FilP) encoded by
 the neighbouring gene of *Streptomyces* was a very similar, but much shorter,
 kind of protein as Scy. I also found that a previously-characterised *S.
 coelicolor* coiled-coil protein involved in polar growth and morphogenesis,
-DivIVA, was of a somewhat similar nature (Walshaw *et al.*, 2010), although less similar than FilP. It
-was then a case of analysing various other coiled-coil or probable coiled-coil
+DivIVA, was of a somewhat similar nature (Walshaw *et al.*, 2010), although
+less similar than FilP. It
+was then a case of analysing, sequence by sequence, various other coiled-coil or probable coiled-coil
 proteins implicated in the literature for various reasons. However, this
 approach was limited and it seemed
 useful to be able to perform a systematic, exhaustive search of all protein
-sequences in the UniProtKB database. The results of the search for the
+sequences in the UniProtKB database; UNWAVER was then written for this purpose.
+The results of the search for the
 'Scy-like repeat' are in Walshaw *et al.* (2010), which is also the
 reference to cite for UNWAVER. 
 
@@ -93,7 +97,8 @@ reference to cite for UNWAVER.
 *Annu. Rev. Biophys. Biophys. Chem.* **15**:321-353.
 * Fauchere J.-L., Pliska V.E. (1983) *Eur. J. Med. Chem.* **18**:369-375. 
 * Gruber M., Söding J., Lupas A.N. (2005) *Nucleic Acids Res.* **33**(suppl_2):W239-W243. doi:10.1093/nar/gki405
-* Holmes N.A., Walshaw J., Leggett R.M., Thibessard A., Dalton K.A., Gillespie M.D., Hemmings A.M., Gust B., Kelemen G.H. (2013) Coiled-coil protein Scy is a key component of a multiprotein assembly controlling polarized growth in *Streptomyces*. *Proc. Natl. Acad. Sci. USA* **110**(5):E397-E40. doi:10.1073/pnas.1210657110* Hopp T.P., Woods K.R. (1983) A computer program for predicting protein antigenic determinants. *Mol. Immunol.* **20**(4):483-489. 
+* Holmes N.A., Walshaw J., Leggett R.M., Thibessard A., Dalton K.A., Gillespie M.D., Hemmings A.M., Gust B., Kelemen G.H. (2013) Coiled-coil protein Scy is a key component of a multiprotein assembly controlling polarized growth in *Streptomyces*. *Proc. Natl. Acad. Sci. USA* **110**(5):E397-E40. doi:10.1073/pnas.1210657110
+* Hopp T.P., Woods K.R. (1983) A computer program for predicting protein antigenic determinants. *Mol. Immunol.* **20**(4):483-489. 
 * Janin J. (1979) Surface and inside volumes in globular proteins. *Nature* **277**(5696):491-492. 
 * Kyte J., Doolittle R. F. (1982) A simple method for displaying the hydropathic character of a protein. *J. Mol. Biol.* **157**(1):105-132.
 * Qiagen Bioinformatics. Hydrophobicity scales. https://resources.qiagenbioinformatics.com/manuals/clcgenomicsworkbench/650/Hydrophobicity_scales.html
@@ -117,8 +122,8 @@ hydrophobicity scale for amino acids).
 ### Example usage
 
     unwaver -i uniprot.fasta -b AVILMFYW > uniprot_unwaver.txt
-    unwaver -i uniprot.fasta -s aa\_hydrophobicity -l 1 -c 4  > uniprot\_unwaver.txt
-    unwaver -i uniprot.fasta -s aa\_hydrophobicity -l 1 -c 4,7  > uniprot\_unwaver.txt
+    unwaver -i uniprot.fasta -s aa_hydrophobicity -l 1 -c 4  > uniprot_unwaver.txt
+    unwaver -i uniprot.fasta -s aa_hydrophobicity -l 1 -c 4,7  > uniprot_unwaver.txt
 
 ### Format of scale file
 
@@ -127,7 +132,9 @@ code or nucleotide code). There must be a minimum of two columns. One column
 must contain the letters, and at least one column must contain scores for all
 letters. **It is permissible to use more than one set of scores (e.g. two
 different amino-acid hydrophobicity scales) simultaneously;** in this case,
-the calculations will be done independently for each.
+the calculations will be done independently for each. (It is also permissible
+to mix one or more scale-based scoring schemes using -s, with a binary scoring
+scheme using -b.)
 
 By default, if -s is used (to specify a scale file), then one scale will be
 used, and by default that will be read from the second column, with the first
@@ -172,7 +179,7 @@ The default window size is **129**, meaning the strongest-period value is
 assigned to the 65th amino acid (or nucleotide) of each window.
 
 For example, using the default window size of 129, a protein sequence of
-length 540 has 475 different windows: the first is 1 - 129, and the last is
+length 540 has 412 different windows: the first is 1 - 129, and the last is
 412 - 540. The centre of the first is amino acid 65, and the centre of the
 last is 476, so a periodicity value (i.e. strongest in each window) is
 assigned for each of positions 65 - 476, thus 412 in all. No value is defined
@@ -182,13 +189,13 @@ The result, for a single sequence, is therefore a readout of the value of the
 strongest periodicity versus each position in the input sequence (omitting the
 positions at the end, i.e. those which are not the centres of any window).
 This might be represented on a plot where the x-axis is amino acid position
-(starting at 33 and ending at 508 in this example) and the y-axis is the
+(starting at 65 and ending at 476 in this example) and the y-axis is the
 strongest periodicity.
 
 ### Averaging periods: statistics windows
 
 The calculation of the strongest period for each amino acid position
-(representing a 'window' of amino acids) is not fully sufficient for the aim
+(each representing the centre of a 'window' of amino acids) is not fully sufficient for the aim
 of UNWAVER, i.e. to find repeats of a particular periodicity in a segment or
 segments of many protein sequences. Within a domain containing a hydrophobic
 repeat (for example), the value of the strongest period will very rarely be
@@ -221,7 +228,7 @@ amino acid 97. So with default settings, the stats window output begins at
 position 97.
 
 The reporting of segments of interest is thus specified by the average
-(**mean**) value of the strongest periodicity lying with a +/- range of the
+(**mean**) value of the strongest periodicity, which must lie within a +/- range of the
 target periodicity over one or more consecutive stats windows. This permits
 an additional constraint, i.e. how much deviation there is from the mean
 within the stats window, whatever that mean is. The standard deviation is
@@ -230,7 +237,7 @@ the constraint used.
 The default **target** periodicity value is effectively meaningless, i.e.
 0.000; therefore -target should always be specified. The default 
 periodicity **range** (-range) is 0.1 (which is quite liberal). The default
-maximum permissible **standard deviation** is 1.0, which is very liberal.
+maximum permissible **standard deviation** (-maxsigma) is 1.0, which is very liberal.
 
 Files containing the FT window values and stats window values as tables
 (one row per amino acid position) may be output by using -peaks and -stats
@@ -240,8 +247,8 @@ respectively.
 
 #### Commentary options
 
-    -q	          quiet output mode (off by default)
-    -v	          verbose mode (off by default)
+    -q       quiet output mode (off by default)
+    -v       verbose mode (off by default)
     -debug        debug mode (off by default)
     -r INTEGER    frequency  (number of sequences processed so far) of progress report
 
@@ -263,20 +270,20 @@ respectively.
     -on INTEGER    'on' value for binary treatment of bases/residues (default is 1)
     -off INTEGER   'off' value for binary treatment of bases/residues (default is 0)
     -s STRING      name of scale file (no default)
-    -x	FLOAT      value to assign to unrecognized single-letter codes, if using scoring scale (default is -100.0)
+    -x FLOAT       value to assign to unrecognized single-letter codes, if using scoring scale (default is -100.0)
     -sskip         skip blank lines in scale file (off by default)
     -h	           help mode (off by default); **NB** this is not yet implemented.
     -scomment      comment symbol in scale file (default is '#')
-    -c	INTEGER[,INTEGER...[,INTEGER ...]]data column number(s) in scale file (separate with commas if more than one value) (default is 2)
+    -c INTEGER[,INTEGER...[,INTEGER ...]]    data column number(s) in scale file (separate with commas if more than one value) (default is 2)
     -l INTEGER     label (single-letter code) column number in scale file (default is 1)
 
 #### Periodicity-calculation options
     -from FLOAT    lowest period for which to calculate FT (default is 3.000)
-    -to   FLOAT    highest period for which to calculate FT (default is 4.000)
-    -f    INTEGER  number of frequencies (or periods) to calculate (default is sequence length)
+    -to FLOAT    highest period for which to calculate FT (default is 4.000)
+    -f INTEGER  number of frequencies (or periods) to calculate (default is sequence length)
     -target FLOAT  only report segments within range of this target PERIOD (and with sigma <= maxsigma) (default is 0.0)
-    -range  FLOAT  see target (default is 0.100)
-    -w    INTEGER  window size (residues) for calculating FT (default is 129)
+    -range FLOAT  see target (default is 0.100)
+    -w INTEGER  window size (residues) for calculating FT (default is 129)
 
 #### Statistics options
     -wstats INTEGER	size of window (in residues) for calculating stats (default is 65)
