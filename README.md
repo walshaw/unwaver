@@ -247,8 +247,8 @@ respectively.
 
 #### Commentary options
 
-    -q       quiet output mode (off by default)
-    -v       verbose mode (off by default)
+    -q           quiet output mode (off by default)
+    -v           verbose mode (off by default)
     -debug        debug mode (off by default)
     -r INTEGER    frequency  (number of sequences processed so far) of progress report
 
@@ -272,18 +272,18 @@ respectively.
     -s STRING      name of scale file (no default)
     -x FLOAT       value to assign to unrecognized single-letter codes, if using scoring scale (default is -100.0)
     -sskip         skip blank lines in scale file (off by default)
-    -h	           help mode (off by default); **NB** this is not yet implemented.
+    -h        help mode (off by default); **NB** this is not yet implemented.
     -scomment      comment symbol in scale file (default is '#')
     -c INTEGER[,INTEGER...[,INTEGER ...]]    data column number(s) in scale file (separate with commas if more than one value) (default is 2)
     -l INTEGER     label (single-letter code) column number in scale file (default is 1)
 
 #### Periodicity-calculation options
     -from FLOAT    lowest period for which to calculate FT (default is 3.000)
-    -to FLOAT    highest period for which to calculate FT (default is 4.000)
-    -f INTEGER  number of frequencies (or periods) to calculate (default is sequence length)
+    -to FLOAT      highest period for which to calculate FT (default is 4.000)
+    -f INTEGER     number of frequencies (or periods) to calculate (default is sequence length)
     -target FLOAT  only report segments within range of this target PERIOD (and with sigma <= maxsigma) (default is 0.0)
-    -range FLOAT  see target (default is 0.100)
-    -w INTEGER  window size (residues) for calculating FT (default is 129)
+    -range FLOAT   see target (default is 0.100)
+    -w INTEGER     window size (residues) for calculating FT (default is 129)
 
 #### Statistics options
     -wstats INTEGER	size of window (in residues) for calculating stats (default is 65)
